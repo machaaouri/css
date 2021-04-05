@@ -1,0 +1,215 @@
+@gap: 4vh;
+@padding: 4vh;
+@color: #48cae4;
+
+@mobile: 480px;
+@tablet: 768px;
+@desktop: 1440px;
+
+// Mixin
+.responsive(@maxWidth; @rules) {
+  @media only screen and (max-width: @maxWidth) {
+    @rules();
+  }
+}
+
+// level-one card layout
+.level-one {
+  .container {
+    display: flex;
+    //to lay .block-* classes in a column
+    flex-direction: column;
+    //Setting gap between the .block-* classes
+    gap: @gap;
+    // to set some padding & border inside
+    padding: @padding;
+    border: 1vh solid @color;
+
+    [class^="block-"] {
+      display: flex;
+      flex-direction: row;
+      height: calc(((100vh - 2vh) - @gap*2 - @padding*2) / 3);
+      gap: @gap;
+      //Style rules for mobile display
+      .responsive(@mobile, {
+        flex-direction: column;
+        height: 500px
+      });
+
+      [class^="box-"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        flex-basis: calc((100%) / 3);
+        border: 2px solid black;
+        border-radius: 10px;
+        background-color: #c1c1c1;
+      }
+    }
+  }
+}
+
+// level-two navbar
+.level-two {
+  .container {
+    font-size: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: @padding;
+    border: 1vh solid @color;
+    //style rules starts from Tablet Screens
+    .responsive(@tablet, {
+        height: 100vh;
+        //Changing orientation of the items
+        flex-direction: column;
+        align-items: center;
+        //Setting gap for items Vertically
+        gap: @gap;
+    });
+  }
+}
+
+// level-Three  sidebar
+.level-three {
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: @gap;
+    padding: @padding;
+
+    .responsive(@mobile, {
+        flex-direction: column;
+    });
+
+    [class^="block-"] {
+      //To put the left, right text at center
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 4px solid @color;
+      //Setting height of each block
+      height: calc(100vh - @padding * 2);
+      // Style Rules for Mobile Display
+      .responsive(@mobile, {
+        height: calc(50vh - @padding * 2);
+      });
+    }
+
+    .block-1 {
+      flex-grow: 2;
+    }
+    .block-2 {
+      flex-grow: 8;
+    }
+  }
+}
+
+// level-four card layout
+.level-four {
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: @padding;
+    gap: @gap;
+
+    [class^="block-"] {
+      display: flex;
+      flex-direction: row;
+      gap: @gap;
+      // Removing Padding, Gap & divide by 3
+      height: calc((100vh - @gap * 2 - @padding * 2) / 3);
+      // Style Rules for Mobile Version
+      .responsive(@mobile, {
+          flex-direction: column;
+      });
+    }
+
+    [class^="box-"] {
+      // To place the letter at center
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      // Border, Border-radius & background-color
+      border: 1vh solid @color;
+      border-radius: 10px;
+      background-color: #c1c1c1;
+    }
+
+    //A
+    .box-1 {
+      flex-basis: 100%;
+    }
+
+    //B & D
+    .box-2,
+    .box-5 {
+      flex-basis: 70%;
+    }
+    //E  & C
+    .box-3,
+    .box-4 {
+      flex-basis: 30%;
+    }
+  }
+}
+
+// level-five grail
+.level-five {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: @gap;
+    padding: @padding;
+
+    [class^="block-"] {
+      display: flex;
+      flex-direction: row;
+      gap: @gap;
+    }
+
+    [class^="box-"] {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1vh solid @color;
+      border-radius: 10px;
+    }
+    // Defining A & E Together
+    .box-1,
+    .box-5 {
+      flex-basis: 100%;
+      height: 20vh;
+    }
+
+    // Defining C here
+    .box-3 {
+      flex-basis: 60%;
+      //   Removing Gap & padding
+      height: calc(60vh - @gap * 2 - @padding * 2);
+    }
+
+    // Defining B & D Together
+    .box-2,
+    .box-4 {
+      flex-basis: 20%;
+    }
+
+    .responsive(@mobile, {
+      .block-2 {
+        flex-direction: column;
+        height: 60vh;
+      }
+      // Hiding our B block
+      .box-2 {
+        display: none;
+      }
+      // Increasing Height of C
+      .box-3 {
+        flex-basis: 80%;
+      }
+    });
+  }
+}
